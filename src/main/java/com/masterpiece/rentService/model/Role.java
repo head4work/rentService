@@ -1,4 +1,6 @@
 package com.masterpiece.rentService.model;
 
-public class Property {
+public enum Role {
+    USER,
+    ADMIN
 }

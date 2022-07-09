@@ -1,10 +1,26 @@
 package com.masterpiece.rentService.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.Set;
 
+@Entity
+@Table(name = "rents")
 public class Rent extends AbstractNamedEntity {
 
+    @Column(name = "description", nullable = false)
+    @NotBlank
+    @Size(min = 2, max = 120)
     private String description;
+
+    @Column(name = "create_date_time", nullable = false)
+    @NotNull
+    private LocalDateTime CreateDateTime;
 
     private String image;
 
@@ -12,12 +28,9 @@ public class Rent extends AbstractNamedEntity {
 
     private Set<Status> statuses;
 
-    public Rent(Integer id, String name, String description, String image, Boolean available, Set<Status> statuses) {
-        super(id, name);
-        this.description = description;
-        this.image = image;
-        this.available = available;
-        this.statuses = statuses;
+
+    public Rent() {
+
     }
 
     public String getDescription() {

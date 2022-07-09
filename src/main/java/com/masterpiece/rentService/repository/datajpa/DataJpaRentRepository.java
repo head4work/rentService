@@ -2,10 +2,12 @@ package com.masterpiece.rentService.repository.datajpa;
 
 import com.masterpiece.rentService.model.Rent;
 import com.masterpiece.rentService.repository.RentRepository;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Repository
 public class DataJpaRentRepository implements RentRepository {
 
     private CrudRentRepository crudRentRepository;

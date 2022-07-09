@@ -10,7 +10,11 @@ import java.util.List;
 @Repository
 public class DataJpaUserRepository implements UserRepository {
 
-    private CrudUserRepository crudUserRepository;
+    private final CrudUserRepository crudUserRepository;
+
+    public DataJpaUserRepository(CrudUserRepository crudUserRepository) {
+        this.crudUserRepository = crudUserRepository;
+    }
 
     @Override
     @Transactional

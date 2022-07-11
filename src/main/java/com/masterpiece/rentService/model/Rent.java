@@ -28,7 +28,6 @@ public class Rent extends AbstractNamedEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lot_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-
     private Lot lot;
 
     @Enumerated(EnumType.STRING)
@@ -42,5 +41,50 @@ public class Rent extends AbstractNamedEntity {
 
     }
 
+    public Rent(Integer id, String name, LocalDateTime startRent, LocalDateTime endRent, Set<Status> statuses) {
+        super(id, name);
+        this.startRent = startRent;
+        this.endRent = endRent;
+        this.statuses = statuses;
+    }
 
+    public LocalDateTime getStartRent() {
+        return startRent;
+    }
+
+    public void setStartRent(LocalDateTime startRent) {
+        this.startRent = startRent;
+    }
+
+    public LocalDateTime getEndRent() {
+        return endRent;
+    }
+
+    public void setEndRent(LocalDateTime endRent) {
+        this.endRent = endRent;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Lot getLot() {
+        return lot;
+    }
+
+    public void setLot(Lot lot) {
+        this.lot = lot;
+    }
+
+    public Set<Status> getStatuses() {
+        return statuses;
+    }
+
+    public void setStatuses(Set<Status> statuses) {
+        this.statuses = statuses;
+    }
 }

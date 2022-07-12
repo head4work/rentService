@@ -28,7 +28,7 @@ public class Lot extends AbstractNamedEntity {
     @Column(name = "available", nullable = false, columnDefinition = "bool default true")
     private Boolean available;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "lot")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Rent> rents;
 

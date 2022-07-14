@@ -12,6 +12,10 @@ public class DataJpaRentRepository implements RentRepository {
 
     private CrudRentRepository crudRentRepository;
 
+    public DataJpaRentRepository(CrudRentRepository crudRentRepository) {
+        this.crudRentRepository = crudRentRepository;
+    }
+
     @Override
     public Rent save(Rent meal, int userId) {
         return null;

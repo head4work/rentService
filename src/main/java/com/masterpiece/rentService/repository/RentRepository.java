@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface RentRepository {
     // null if updated meal do not belong to userId
-    Rent save(Rent meal, int userId);
+    Rent save(Rent rent, int userId);
 
     // false if meal do not belong to userId
     boolean delete(int id, int userId);

@@ -15,7 +15,7 @@ import java.util.List;
 public class Lot extends AbstractNamedEntity {
     @Column(name = "description", nullable = false)
     @NotBlank
-    @Size(min = 2, max = 120)
+    @Size(min = 2, max = 300)
     private String description;
 
     @Column(name = "create_date_time", nullable = false)

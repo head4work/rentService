@@ -22,7 +22,7 @@ public class DataJpaLotRepository implements LotRepository {
 
     @Override
     public boolean delete(int id, int userId) {
-        return false;
+        return lotRepository.delete(id) != 0;
     }
 
     @Override

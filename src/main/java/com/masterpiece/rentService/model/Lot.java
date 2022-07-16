@@ -7,16 +7,21 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "lots")
 public class Lot extends AbstractNamedEntity {
+
     @Column(name = "description", nullable = false)
     @NotBlank
     @Size(min = 2, max = 300)
     private String description;
+
+    @Column(name = "price")
+    private BigDecimal price;
 
     @Column(name = "create_date_time", nullable = false)
     @NotNull
@@ -35,12 +40,15 @@ public class Lot extends AbstractNamedEntity {
     public Lot() {
     }
 
-    public Lot(Integer id, String name, String description, LocalDateTime createDateTime, String image, Boolean available) {
+    public Lot(Integer id, String name, String description, BigDecimal price, LocalDateTime createDateTime,
+               String image, Boolean available, List<Rent> rents) {
         super(id, name);
         this.description = description;
+        this.price = price;
         CreateDateTime = createDateTime;
         this.image = image;
         this.available = available;
+        this.rents = rents;
     }
 
     public String getDescription() {
@@ -81,5 +89,13 @@ public class Lot extends AbstractNamedEntity {
 
     public void setRents(List<Rent> rents) {
         this.rents = rents;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }

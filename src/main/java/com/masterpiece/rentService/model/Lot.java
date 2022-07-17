@@ -2,14 +2,18 @@ package com.masterpiece.rentService.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.core.annotation.Order;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Entity
 @Table(name = "lots")
@@ -21,7 +25,13 @@ public class Lot extends AbstractNamedEntity {
     private String description;
 
     @Column(name = "price")
+    @NotBlank
     private BigDecimal price;
+
+    /*@CollectionTable(name = "rents")
+    @JoinColumn(name = "user_id")
+    @ElementCollection(fetch = FetchType.LAZY)
+    ConcurrentHashMap<LocalDate, Integer> rents;*/
 
     @Column(name = "create_date_time", nullable = false)
     @NotNull
@@ -30,24 +40,25 @@ public class Lot extends AbstractNamedEntity {
     @Column(name = "images")
     private String image;
 
-    @Column(name = "available", nullable = false, columnDefinition = "bool default true")
-    private Boolean available;
+    // LotTo
+    /*@Column(name = "available", nullable = false, columnDefinition = "bool default true")
+    private Boolean available;*/
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "lot")
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "lot_id")
+    @OrderBy("startRent DESC")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<Rent> rents;
+    private Set<Rent> rents;
 
     public Lot() {
     }
 
-    public Lot(Integer id, String name, String description, BigDecimal price, LocalDateTime createDateTime,
-               String image, Boolean available, List<Rent> rents) {
+    public Lot(Integer id, String name, String description, BigDecimal price, LocalDateTime createDateTime, String image, Set<Rent> rents) {
         super(id, name);
         this.description = description;
         this.price = price;
         CreateDateTime = createDateTime;
         this.image = image;
-        this.available = available;
         this.rents = rents;
     }
 
@@ -57,6 +68,14 @@ public class Lot extends AbstractNamedEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public LocalDateTime getCreateDateTime() {
@@ -75,27 +94,11 @@ public class Lot extends AbstractNamedEntity {
         this.image = image;
     }
 
-    public Boolean getAvailable() {
-        return available;
-    }
-
-    public void setAvailable(Boolean available) {
-        this.available = available;
-    }
-
-    public List<Rent> getRents() {
+    public Set<Rent> getRents() {
         return rents;
     }
 
-    public void setRents(List<Rent> rents) {
+    public void setRents(Set<Rent> rents) {
         this.rents = rents;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
     }
 }

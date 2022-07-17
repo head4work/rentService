@@ -45,9 +45,6 @@ public class User extends AbstractNamedEntity {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Role> roles;
 
-    @OneToMany
-    private List<Lot> lots;
-
     public User() {
     }
 

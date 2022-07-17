@@ -29,23 +29,22 @@ public class Rent extends AbstractNamedEntity {
     @JoinColumn(name = "lot_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Lot lot;
-
+/*
+ // RentTo or LotTo
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "rent_statuses")
     @Column(name = "statuses")
     @ElementCollection(fetch = FetchType.EAGER)
-//    @Fetch(FetchMode.SUBSELECT)
     private Set<Status> statuses;
+*/
 
     public Rent() {
-
     }
 
-    public Rent(Integer id, String name, LocalDateTime startRent, LocalDateTime endRent, Set<Status> statuses) {
+    public Rent(Integer id, String name, LocalDateTime startRent, LocalDateTime endRent) {
         super(id, name);
         this.startRent = startRent;
         this.endRent = endRent;
-        this.statuses = statuses;
     }
 
     public LocalDateTime getStartRent() {
@@ -80,11 +79,4 @@ public class Rent extends AbstractNamedEntity {
         this.lot = lot;
     }
 
-    public Set<Status> getStatuses() {
-        return statuses;
-    }
-
-    public void setStatuses(Set<Status> statuses) {
-        this.statuses = statuses;
-    }
 }

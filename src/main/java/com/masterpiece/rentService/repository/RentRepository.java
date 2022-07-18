@@ -2,27 +2,18 @@ package com.masterpiece.rentService.repository;
 
 import com.masterpiece.rentService.model.Rent;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 public interface RentRepository {
-    // null if updated meal do not belong to userId
+    // null if updated lot do not belong to userId
     Rent save(Rent rent, int userId);
 
-    // false if meal do not belong to userId
+    // false if lot do not rented by userId
     boolean delete(int id, int userId);
 
-    // null if meal do not belong to userId
-    Rent get(int id, int userId);
+    // sorted by date
+    Rent getAll(int userId);
 
-    // ORDERED dateTime desc
-    List<Rent> getAll(int userId);
-
-    // ORDERED dateTime desc
-    List<Rent> getBetweenHalfOpen(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId);
-
-    default Rent getWithUser(int id, int userId) {
+   /* default Rent getWithUser(int id, int userId) {
         throw new UnsupportedOperationException();
-    }
+    }*/
 
 }

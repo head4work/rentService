@@ -2,18 +2,14 @@ package com.masterpiece.rentService.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.core.annotation.Order;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Entity
 @Table(name = "lots")
@@ -33,7 +29,7 @@ public class Lot extends AbstractNamedEntity {
     @ElementCollection(fetch = FetchType.LAZY)
     ConcurrentHashMap<LocalDate, Integer> rents;*/
 
-    @Column(name = "create_date_time", nullable = false)
+    @Column(name = "create_date_time", nullable = false, columnDefinition = "timestamp default now()", updatable = false)
     @NotNull
     private LocalDateTime CreateDateTime;
 
@@ -46,7 +42,7 @@ public class Lot extends AbstractNamedEntity {
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "lot_id")
-    @OrderBy("startRent DESC")
+    @OrderBy("startRentDate DESC")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Rent> rents;
 

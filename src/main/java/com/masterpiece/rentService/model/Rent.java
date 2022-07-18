@@ -6,19 +6,18 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Entity
 @Table(name = "rents")
-public class Rent extends AbstractNamedEntity {
+public class Rent extends AbstractBaseEntity {
 
     @Column(name = "date_start", nullable = false)
     @NotNull
-    private LocalDateTime startRent;
+    private LocalDateTime startRentDate;
 
     @Column(name = "date_end", nullable = false)
     @NotNull
-    private LocalDateTime endRent;
+    private LocalDateTime endRentDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -41,26 +40,26 @@ public class Rent extends AbstractNamedEntity {
     public Rent() {
     }
 
-    public Rent(Integer id, String name, LocalDateTime startRent, LocalDateTime endRent) {
-        super(id, name);
-        this.startRent = startRent;
-        this.endRent = endRent;
+    public Rent(Integer id, LocalDateTime startRent, LocalDateTime endRent) {
+        super(id);
+        this.startRentDate = startRent;
+        this.endRentDate = endRent;
     }
 
-    public LocalDateTime getStartRent() {
-        return startRent;
+    public LocalDateTime getStartRentDate() {
+        return startRentDate;
     }
 
-    public void setStartRent(LocalDateTime startRent) {
-        this.startRent = startRent;
+    public void setStartRentDate(LocalDateTime startRent) {
+        this.startRentDate = startRent;
     }
 
-    public LocalDateTime getEndRent() {
-        return endRent;
+    public LocalDateTime getEndRentDate() {
+        return endRentDate;
     }
 
-    public void setEndRent(LocalDateTime endRent) {
-        this.endRent = endRent;
+    public void setEndRentDate(LocalDateTime endRent) {
+        this.endRentDate = endRent;
     }
 
     public User getUser() {

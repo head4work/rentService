@@ -19,9 +19,16 @@ public class LotService {
         return lotRepository.save(lot, userId);
     }
 
+    public void update(Lot lot, int userId) {
+        checkNotFoundWithId(lotRepository.save(lot, userId), lot.id());
+    }
+
     public void delete(int id, int userId) {
         checkNotFoundWithId(lotRepository.delete(id, userId), id);
     }
 
+    public Lot get(int id) {
+        return checkNotFoundWithId(lotRepository.get(id), id);
+    }
 
 }

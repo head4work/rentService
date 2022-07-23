@@ -8,8 +8,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface CrudLotRepository extends JpaRepository<Lot, Integer> {
+
     @Transactional
     @Modifying
-    @Query("DELETE FROM User u WHERE u.id=:id")
+    @Query("DELETE FROM Lot l WHERE l.id=:id")
     int delete(@Param("id") int id);
+
 }

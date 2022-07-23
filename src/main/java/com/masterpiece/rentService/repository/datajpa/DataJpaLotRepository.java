@@ -18,12 +18,12 @@ public class DataJpaLotRepository implements LotRepository {
     }
 
     @Override
-    public Lot save(Lot lot, int userID) {
+    public Lot save(Lot lot) {
         return lotRepository.save(lot);
     }
 
     @Override
-    public boolean delete(int id, int userId) {
+    public boolean delete(int id) {
         return lotRepository.delete(id) != 0;
     }
 

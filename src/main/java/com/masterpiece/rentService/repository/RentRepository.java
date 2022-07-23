@@ -11,7 +11,7 @@ public interface RentRepository {
     // false if lot do not rented by userId
     boolean delete(int id, int userId);
 
-    //return null if it doesn't belong to user
+    //return null if it doesn't belong to user or adminId
     Rent get(int id, int userId);
 
     // sorted by date

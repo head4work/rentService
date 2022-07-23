@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface LotRepository {
 
-    Lot save(Lot lot, int userID);
+    Lot save(Lot lot);
 
-    boolean delete(int id, int userId);
+    boolean delete(int id);
 
     Lot get(int id);
 

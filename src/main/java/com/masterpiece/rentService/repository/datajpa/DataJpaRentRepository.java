@@ -38,7 +38,7 @@ public class DataJpaRentRepository implements RentRepository {
 
     @Override
     public List<Rent> getAll(int userId) {
-        return null;
+        return crudRentRepository.findAll();
     }
 
 

@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional(readOnly = true)
 public interface CrudRentRepository extends JpaRepository<Rent, Integer> {
     @Transactional
@@ -14,5 +16,7 @@ public interface CrudRentRepository extends JpaRepository<Rent, Integer> {
     @Query("DELETE FROM Rent r WHERE r.id=:id AND r.user.id=:userId")
     int delete(@Param("id") int id, @Param("userId") int userId);
 
+    @Query("SELECT r FROM Rent r WHERE r.user.id=:userId ORDER BY r.endRentDate DESC")
+    List<Rent> getAll(@Param("userId") int userId);
 
 }

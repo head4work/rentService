@@ -5,7 +5,7 @@ import com.masterpiece.rentService.model.Rent;
 import java.util.List;
 
 public interface RentRepository {
-    // null if updated lot do not belong to userId
+    // null if updated rent do not belong to userId
     Rent save(Rent rent, int userId);
 
     // admin only

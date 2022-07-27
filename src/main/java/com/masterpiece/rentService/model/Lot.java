@@ -40,8 +40,7 @@ public class Lot extends AbstractNamedEntity {
     /*@Column(name = "available", nullable = false, columnDefinition = "bool default true")
     private Boolean available;*/
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "lot_id")
+    @OneToMany(mappedBy = "lot")
     @OrderBy("startRentDate DESC")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Rent> rents;

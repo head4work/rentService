@@ -8,8 +8,8 @@ public interface RentRepository {
     // null if updated lot do not belong to userId
     Rent save(Rent rent, int userId);
 
-    // false if lot do not rented by userId
-    boolean delete(int id, int userId);
+    // admin only
+    boolean delete(int id);
 
     //return null if it doesn't belong to user or adminId
     Rent get(int id, int userId);

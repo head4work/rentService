@@ -13,8 +13,8 @@ import java.util.List;
 public interface CrudRentRepository extends JpaRepository<Rent, Integer> {
     @Transactional
     @Modifying
-    @Query("DELETE FROM Rent r WHERE r.id=:id AND r.user.id=:userId")
-    int delete(@Param("id") int id, @Param("userId") int userId);
+    @Query("DELETE FROM Rent r WHERE r.id=:id")
+    int delete(@Param("id") int id);
 
     @Query("SELECT r FROM Rent r WHERE r.user.id=:userId ORDER BY r.endRentDate DESC")
     List<Rent> getAll(@Param("userId") int userId);

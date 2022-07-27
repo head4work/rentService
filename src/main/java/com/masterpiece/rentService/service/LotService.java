@@ -17,16 +17,16 @@ public class LotService {
         this.lotRepository = lotRepository;
     }
 
-    public Lot create(Lot lot, int userId) {
-        return lotRepository.save(lot, userId);
+    public Lot create(Lot lot) {
+        return lotRepository.save(lot);
     }
 
-    public void update(Lot lot, int userId) {
-        checkNotFoundWithId(lotRepository.save(lot, userId), lot.id());
+    public void update(Lot lot) {
+        checkNotFoundWithId(lotRepository.save(lot), lot.id());
     }
 
-    public void delete(int id, int userId) {
-        checkNotFoundWithId(lotRepository.delete(id, userId), id);
+    public void delete(int id) {
+        checkNotFoundWithId(lotRepository.delete(id), id);
     }
 
     public Lot get(int id) {

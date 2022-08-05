@@ -16,6 +16,11 @@
 <div class="container">
     <div class="row">
         <h1> lots</h1>
+        <div class="row">
+            <div class="col-lg-3">
+                <a class="btn btn-primary mb-3" th:href="@{/lots/new}"> Add Lot</a>
+            </div>
+        </div>
         <table class="table">
             <thead class="table-dark">
             <tr>
@@ -31,6 +36,14 @@
                 <td th:text="${lot.description}"></td>
                 <td th:text="${lot.price}"></td>
                 <td th:text="${lot.image}"></td>
+                <td>
+                    <a class="btn btn-primary btn-sm"
+                       th:href="@{/lots/edit/{id}(id=${lot.id})}">Update</a>
+
+                    <a class="btn btn-danger btn-sm"
+                       th:href="@{/lots/delete/{id}(id=${lot.id})}">Delete</a>
+
+                </td>
             </tr>
             </tbody>
         </table>

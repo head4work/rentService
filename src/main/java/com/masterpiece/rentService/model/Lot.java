@@ -48,6 +48,10 @@ public class Lot extends AbstractNamedEntity {
     public Lot() {
     }
 
+    public Lot(LocalDateTime createDateTime) {
+        CreateDateTime = createDateTime;
+    }
+
     public Lot(Integer id, String name, String description, BigDecimal price, LocalDateTime createDateTime, String image, Set<Rent> rents) {
         super(id, name);
         this.description = description;

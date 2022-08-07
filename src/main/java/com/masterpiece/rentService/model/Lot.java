@@ -5,10 +5,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -22,7 +19,8 @@ public class Lot extends AbstractNamedEntity {
     @Size(min = 2, max = 300)
     private String description;
 
-    @Column(name = "price", precision = 6, scale = 2)
+    @Column(name = "price")
+    @Digits(integer = 3, fraction = 2)
     @DecimalMin("0.1")
     private BigDecimal price;
 

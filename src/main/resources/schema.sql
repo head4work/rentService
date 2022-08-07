@@ -31,7 +31,7 @@ CREATE TABLE lots
     name             VARCHAR                           NOT NULL,
     create_date_time TIMESTAMP           DEFAULT now() NOT NULL,
     description      TEXT                              NOT NULL,
-    price            DECIMAL(8, 2)                     NOT NULL,
+    price            DECIMAL                           NOT NULL,
     images           VARCHAR
 
 

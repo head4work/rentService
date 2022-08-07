@@ -39,9 +39,17 @@ public class LotController {
         return "lotForm";
     }
 
+    @GetMapping("/edit/{id}")
+    public String lotUpdate(@PathVariable int id, Model model) {
+        model.addAttribute("lot", lotService.get(id));
+        return "lotForm";
+    }
+
     @PostMapping("/new")
     public String createLot(@ModelAttribute("lot") Lot lot) {
         lotService.create(lot);
         return "redirect:/lots";
     }
+
+
 }

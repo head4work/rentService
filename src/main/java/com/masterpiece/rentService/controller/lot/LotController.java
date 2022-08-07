@@ -4,9 +4,7 @@ import com.masterpiece.rentService.model.Lot;
 import com.masterpiece.rentService.service.LotService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -39,5 +37,11 @@ public class LotController {
     public String createLot(Model model) {
         model.addAttribute("lot", new Lot(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS)));
         return "lotForm";
+    }
+
+    @PostMapping("/new")
+    public String createLot(@ModelAttribute("lot") Lot lot) {
+        lotService.create(lot);
+        return "redirect:/lots";
     }
 }

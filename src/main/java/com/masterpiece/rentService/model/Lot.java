@@ -2,8 +2,10 @@ package com.masterpiece.rentService.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -20,8 +22,8 @@ public class Lot extends AbstractNamedEntity {
     @Size(min = 2, max = 300)
     private String description;
 
-    @Column(name = "price")
-    @NotBlank
+    @Column(name = "price", precision = 6, scale = 2)
+    @DecimalMin("0.1")
     private BigDecimal price;
 
     /*@CollectionTable(name = "rents")
@@ -29,6 +31,7 @@ public class Lot extends AbstractNamedEntity {
     @ElementCollection(fetch = FetchType.LAZY)
     ConcurrentHashMap<LocalDate, Integer> rents;*/
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column(name = "create_date_time", nullable = false, columnDefinition = "timestamp default now()", updatable = false)
     @NotNull
     private LocalDateTime CreateDateTime;

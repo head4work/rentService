@@ -18,7 +18,7 @@ VALUES ('USER', 100000),
        ('ADMIN', 100001),
        ('USER', 100001);
 
-INSERT INTO lots (id, name, create_date_time, description, price, images)
-VALUES (100002, 'post', '2016-06-22 19:10:25-07', 'great post to have your flag on', 345.23, 'image'),
-       (100003, 'chair', '2017-06-22 19:10:25-07', 'great chair to sit on', 333.23, 'image'),
-       (100004, 'table', '2018-06-22 19:10:25-07', 'great to have a dinner on', 999.99, 'image');
+INSERT INTO lots (name, create_date_time, description, price, images)
+VALUES ('post', '2016-06-22 19:10:25-07', 'great post to have your flag on', 345.23, 'image'),
+       ('chair', '2017-06-22 19:10:25-07', 'great chair to sit on', 333.23, 'image'),
+       ('table', '2018-06-22 19:10:25-07', 'great to have a dinner on', 999.99, 'image');

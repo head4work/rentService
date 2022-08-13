@@ -4,8 +4,13 @@ import com.masterpiece.rentService.model.Lot;
 import com.masterpiece.rentService.service.LotService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
@@ -46,7 +51,10 @@ public class LotController {
     }
 
     @PostMapping("/new")
-    public String createLot(@ModelAttribute("lot") Lot lot) {
+    public String createLot(@Valid Lot lot, BindingResult result) {
+        if (result.hasErrors()) {
+            return "lotForm";
+        }
         lotService.create(lot);
         return "redirect:/lots";
     }

@@ -16,12 +16,14 @@ public class Lot extends AbstractNamedEntity {
 
     @Column(name = "description", nullable = false)
     @NotBlank
-    @Size(min = 2, max = 300)
+    @Size(min = 2, max = 300, message = "{Size.Lot.Description}")
     private String description;
 
     @Column(name = "price")
+    @NotNull(message = "{NotNull.Lot.Price}")
     @Digits(integer = 3, fraction = 2)
     @DecimalMin("0.1")
+    @DecimalMax("999.99")
     private BigDecimal price;
 
     /*@CollectionTable(name = "rents")

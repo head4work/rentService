@@ -23,28 +23,42 @@
                     <div class="form-group">
                         <lable>Name:</lable>
                         <input type="text" class="form-control" th:field="*{name}" placeholder="Enter name">
+                        <div class="alert alert-warning" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></div>
+
                     </div>
 
                     <div class="form-group">
                         <lable>Description:</lable>
-                        <input type="text" class="form-control" th:field="*{description}"
-                               placeholder="Enter description">
+                        <input class="form-control" id="description" placeholder="Enter description"
+                               th:field="*{description}" type="text">
+                        <div class="alert alert-warning" th:errors="*{description}"
+                             th:if="${#fields.hasErrors('description')}"></div>
+
                     </div>
 
                     <div class="form-group">
                         <lable>Price:</lable>
                         <input class="form-control" placeholder="Enter price" step="0.01" th:field="*{price}"
                                type="number">
+                        <div class="alert alert-warning" th:errors="*{price}"
+                             th:if="${#fields.hasErrors('price')}"></div>
+
                     </div>
 
                     <div class="form-group">
                         <lable>Date:</lable>
                         <input type="datetime-local" class="form-control" th:field="*{createDateTime}">
+                        <div class="alert alert-warning" th:errors="*{createDateTime}"
+                             th:if="${#fields.hasErrors('createDateTime')}"></div>
+
                     </div>
 
                     <div class="form-group">
                         <lable>Image:</lable>
                         <input type="text" class="form-control" th:field="*{image}" placeholder="Enter image">
+                        <div class="alert alert-warning" th:errors="*{image}"
+                             th:if="${#fields.hasErrors('image')}"></div>
+
                     </div>
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary"> Submit</button>

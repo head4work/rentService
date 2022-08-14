@@ -59,5 +59,10 @@ public class LotController {
         return "redirect:/lots";
     }
 
+    @GetMapping("/rent/{id}")
+    public String rentLot(@PathVariable int id, Model model) {
+        model.addAttribute("lot", lotService.get(id));
+        return "rentForm";
+    }
 
 }

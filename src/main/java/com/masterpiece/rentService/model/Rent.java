@@ -40,6 +40,12 @@ public class Rent extends AbstractBaseEntity {
     public Rent() {
     }
 
+    public Rent(LocalDateTime startRentDate, LocalDateTime endRentDate, Lot lot) {
+        this.startRentDate = startRentDate;
+        this.endRentDate = endRentDate;
+        this.lot = lot;
+    }
+
     public Rent(Integer id, LocalDateTime startRent, LocalDateTime endRent) {
         super(id);
         this.startRentDate = startRent;

@@ -21,9 +21,11 @@ public class RentRestController {
 
 
     @PostMapping("/rent")
-    public ResponseEntity<String> rentLot(@RequestBody Rent rent) {
+    public ResponseEntity<Rent> rentLot(@RequestBody Rent rent) {
         rentService.create(rent);
-        return ResponseEntity.status(HttpStatus.OK).body("success");
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(rent);
     }
 
 }

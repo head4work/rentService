@@ -60,10 +60,12 @@ function ajaxPost() {
 
 	// PREPARE Rent DATA
 	var rentData = {
-		startRentDate: $(selectedDates[0]),
-		endRentDate: $(selectedDates.length > 1 ? selectedDates[1] : selectedDates[0]),
+		startRentDate: selectedDates[0],
+		endRentDate: selectedDates.length > 1 ? selectedDates[1] : selectedDates[0],
+		lot: {
+			lot: lotId
+		}
 
-		lot: $(lotId)
 	}
 
 	// DO POST

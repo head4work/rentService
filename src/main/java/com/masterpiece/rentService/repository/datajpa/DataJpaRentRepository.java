@@ -1,20 +1,25 @@
 package com.masterpiece.rentService.repository.datajpa;
 
+import com.masterpiece.rentService.exception.NotFoundException;
 import com.masterpiece.rentService.model.Rent;
+import com.masterpiece.rentService.model.User;
 import com.masterpiece.rentService.repository.RentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
 public class DataJpaRentRepository implements RentRepository {
 
-    private CrudRentRepository crudRentRepository;
-    private CrudUserRepository crudUserRepository;
+    @Autowired
+    EntityManager entityManager;
 
-    public DataJpaRentRepository(CrudRentRepository crudRentRepository, CrudUserRepository crudUserRepository) {
+    private CrudRentRepository crudRentRepository;
+
+    public DataJpaRentRepository(CrudRentRepository crudRentRepository) {
         this.crudRentRepository = crudRentRepository;
-        this.crudUserRepository = crudUserRepository;
     }
 
     @Override
@@ -22,7 +27,13 @@ public class DataJpaRentRepository implements RentRepository {
         if (!rent.isNew() && get(rent.id(), userId) == null) {
             return null;
         }
-        rent.setUser(crudUserRepository.findById(userId).orElse(null));
+        User user = entityManager.getReference(User.class, userId);
+        //  rent.setUser(crudUserRepository.findById(userId).orElse(null));
+        if (user != null) {
+            rent.setUser(user);
+        } else {
+            throw new NotFoundException(" user with id:" + userId + " not found");
+        }
         return crudRentRepository.save(rent);
     }
 

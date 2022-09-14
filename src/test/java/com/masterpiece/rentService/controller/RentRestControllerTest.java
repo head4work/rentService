@@ -1,8 +1,8 @@
 package com.masterpiece.rentService.controller;
 
 import com.masterpiece.rentService.controller.rent.RentRestController;
-import com.masterpiece.rentService.model.Lot;
 import com.masterpiece.rentService.model.Rent;
+import com.masterpiece.rentService.model.RentData;
 import com.masterpiece.rentService.repository.LotRepository;
 import com.masterpiece.rentService.repository.RentRepository;
 import org.junit.jupiter.api.Test;
@@ -38,9 +38,8 @@ public class RentRestControllerTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         LocalDateTime start = LocalDateTime.parse("2022-09-02T07:00:00.000Z", formatter);
         LocalDateTime end = LocalDateTime.parse("2022-09-04T07:00:00.000Z", formatter);
-        Lot lot = lotRepository.get(100003);
-        Rent newRent = new Rent(start, end, lot);
-        ResponseEntity<Rent> rentResponse = controller.rentLot(newRent);
+        RentData data = new RentData(start, end, 100003);
+        ResponseEntity<Rent> rentResponse = controller.rentLot(data);
         assertThat(rentResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 

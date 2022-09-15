@@ -62,10 +62,7 @@ function ajaxPost() {
 	var rentData = {
 		startRentDate: selectedDates[0],
 		endRentDate: selectedDates.length > 1 ? selectedDates[1] : selectedDates[0],
-		lot: {
-			lot: lotId
-		}
-
+		lotId: lotId
 	}
 
 	// DO POST

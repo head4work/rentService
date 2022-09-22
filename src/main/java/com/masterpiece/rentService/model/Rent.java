@@ -1,6 +1,6 @@
 package com.masterpiece.rentService.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -20,13 +20,15 @@ public class Rent extends AbstractBaseEntity {
     @NotNull
     private LocalDateTime endRentDate;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lot_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

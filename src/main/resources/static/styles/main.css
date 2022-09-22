@@ -125,11 +125,15 @@ h1 span {
 }
 
 .date-picker .dates .days .day.disabled {
+    cursor: no-drop;
+    opacity: 0.3;
     background-color: #9b9b9b;
     text-decoration-line: line-through;
 }
 
 .date-picker .dates .days .day.selected {
+    pointer-events: none;
+
     background-color: #00CA85;
 }
 

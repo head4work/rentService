@@ -2,6 +2,8 @@ package com.masterpiece.rentService.controller.lot;
 
 import com.masterpiece.rentService.model.Lot;
 import com.masterpiece.rentService.service.LotService;
+import com.masterpiece.rentService.service.RentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +20,8 @@ import java.time.temporal.ChronoUnit;
 @RequestMapping("/lots")
 public class LotController {
 
+    @Autowired
+    private RentService rentService;
 
     private LotService lotService;
 
@@ -61,7 +65,9 @@ public class LotController {
 
     @GetMapping("/rent/{id}")
     public String rentLot(@PathVariable int id, Model model) {
-        model.addAttribute("lot", lotService.get(id));
+        Lot lot = lotService.get(id);
+        model.addAttribute("lot", lot);
+        model.addAttribute("lotRentDates", rentService.getLotRentDates(lot));
         return "rentForm";
     }
 

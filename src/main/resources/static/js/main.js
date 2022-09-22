@@ -7,6 +7,8 @@ const prev_mth_element = document.querySelector('.date-picker .dates .month .pre
 const days_element = document.querySelector('.date-picker .dates .days');
 const rent_button = document.querySelector('.rent-button');
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const price_element = document.getElementById('price');
+const days_between = document.querySelector('.date-picker .dates .days .selected-between');
 
 // const createSelectedDateObj = (selectedDay, selectedMonth, selectedYear) => ({ selectedDay, selectedMonth, selectedYear });
 
@@ -24,16 +26,19 @@ let selectedYear = year;
 let selectedDates = [];
 
 let counter = 0;
+var selectedCounter = 0;
 
 
 //TEST DATA HARCODED
-let disableDates = [new Date(year, month, 18, (0, 0, 0, 0)), new Date(year, month, 19, (0, 0, 0, 0)), new Date(year, month, 20, (0, 0, 0, 0))];
+// let disableDates = [new Date(year, month, 18, (0, 0, 0, 0)), new Date(year, month, 19, (0, 0, 0, 0)), new Date(year, month, 20, (0, 0, 0, 0))];
+let disableDates = [];
 
 selected_date_element.textContent = formatDate(date);
 selected_date_element.dataset.value = selectedDate;
 mth_element.textContent = months[month] + ' ' + year;
 
 
+populateDisableDates();
 populateDates();
 
 // EVENT LISTENERS
@@ -54,6 +59,10 @@ document.addEventListener('click', function handleClickOutsideBox(event) {
 
 
 // FUNCTIONS
+function populateDisableDates() {
+	lotRentDates.forEach(date => disableDates.push(new Date(date)));
+}
+
 function ajaxPost() {
 	console.log(selectedDates[0]);
 	console.log(selectedDates[1]);
@@ -73,12 +82,10 @@ function ajaxPost() {
 		data: JSON.stringify(rentData),
 		dataType: 'json',
 		success: function (result) {
-			if (result.status == "success") {
-				console.log("succes");
-			} else {
-				console.log("fail");
-			}
-			console.log(result);
+			let incomeDates = result.disableDates.map(date => new Date(date), (0, 0, 0, 0));
+			incomeDates.forEach(date => disableDates.push(date));
+			populateDates();
+
 		},
 		error: function (e) {
 			alert("Error!")
@@ -145,6 +152,8 @@ function purgeSelectedDates() {
 	selectedDates = [];
 	counter = 0;
 	rent_button.classList.remove('active');
+	selectedCounter = 0;
+	price_element.textContent = price;
 }
 
 
@@ -160,6 +169,8 @@ function populateDates() {
 
 		if (counter > 1 && (checkInRange(setDate))) {
 			day_element.classList.add('selected-between');
+			selectedCounter++;
+			console.log(selectedCounter);
 		}
 
 		for (let k = 0; k < selectedDates.length; k++) {
@@ -183,6 +194,8 @@ function populateDates() {
 				selectedDates.push(new Date(year, month, (i + 1), (0, 0, 0, 0)));
 				rent_button.classList.add('active');
 				counter++;
+				selectedCounter++;
+
 				// selectedDay = (i + 1);
 				// selectedMonth = month;
 				// selectedYear = year;
@@ -198,6 +211,7 @@ function populateDates() {
 
 		days_element.appendChild(day_element);
 	}
+	price_element.textContent = price * selectedCounter;
 }
 
 // HELPER FUNCTIONS

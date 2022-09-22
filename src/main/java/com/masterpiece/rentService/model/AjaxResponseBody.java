@@ -13,6 +13,9 @@ public class AjaxResponseBody {
         this.disableDates = disableDates;
     }
 
+    public AjaxResponseBody() {
+    }
+
     public String getMsg() {
         return msg;
     }

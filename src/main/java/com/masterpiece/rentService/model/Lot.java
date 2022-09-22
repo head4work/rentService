@@ -1,5 +1,6 @@
 package com.masterpiece.rentService.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -39,13 +40,11 @@ public class Lot extends AbstractNamedEntity {
     @Column(name = "images")
     private String image;
 
-    // LotTo
-    /*@Column(name = "available", nullable = false, columnDefinition = "bool default true")
-    private Boolean available;*/
 
-    @OneToMany(mappedBy = "lot")
+    @OneToMany(mappedBy = "lot", fetch = FetchType.EAGER)
     @OrderBy("startRentDate DESC")
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonManagedReference
     private Set<Rent> rents;
 
     public Lot() {

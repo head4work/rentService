@@ -85,7 +85,6 @@ function ajaxPost() {
 			let incomeDates = result.disableDates.map(date => new Date(date), (0, 0, 0, 0));
 			incomeDates.forEach(date => disableDates.push(date));
 			populateDates();
-
 		},
 		error: function (e) {
 			alert("Error!")
@@ -133,9 +132,7 @@ function checkInRange(d) {
 		date.setDate(date.getDate() + 1);
 	}
 	dates[0] = '';
-	//console.log(dates.map(d => checkNotDisabled(d)));
 
-	//console.log(!dates.map(d => checkNotDisabled(d)).includes(false));
 	if (!dates.map(d => checkNotDisabled(d)).includes(false)) {
 		return dates.includes(d.toDateString())
 	} else {
@@ -239,9 +236,7 @@ function formatDate(d) {
 	if (month < 10) {
 		month = '0' + month;
 	}
-
 	let year = d.getFullYear();
-
 	return day + ' / ' + month + ' / ' + year;
 }
 

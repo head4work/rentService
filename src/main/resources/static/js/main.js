@@ -64,8 +64,6 @@ function populateDisableDates() {
 }
 
 function ajaxPost() {
-	console.log(selectedDates[0]);
-	console.log(selectedDates[1]);
 
 	// PREPARE Rent DATA
 	var rentData = {

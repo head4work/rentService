@@ -1,24 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-
-<div th:replace="fragments/header :: header"></div>
 <link th:href="@{/styles/main.css}" rel="stylesheet"/>
+<div th:replace="fragments/header :: header"></div>
+
 <div class="wraper">
-    <div class="date-picker">
-        <div class="selected-date"></div>
 
-        <div class="dates">
-            <div class="month">
-                <div class="arrows prev-mth">&lt;</div>
-                <div class="mth"></div>
-                <div class="arrows next-mth">&gt;</div>
-            </div>
-
-            <div class="days"></div>
-        </div>
-        <div id="rent-click"><input class="rent-button" type="button" value="rent"></div>
-    </div>
 
 
     <div class="container" id="lot-card">
@@ -29,17 +16,26 @@
                     <div class="card-body">
                         <h2 class="card-title" th:text="${lot.name}"></h2>
                         <h6 class="card-subtitle mb-2 text-decoration-underline" th:text="${lot.price}"></h6>
-
                         <p class="card-text" th:text="${lot.description}"></p>
                         <a href="#" class="btn btn-primary btn-sm">Rent</a>
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 
+    <div class="date-picker">
+        <div class="selected-date"></div>
+        <div class="dates">
+            <div class="month">
+                <div class="arrows prev-mth">&lt;</div>
+                <div class="mth"></div>
+                <div class="arrows next-mth">&gt;</div>
+            </div>
+            <div class="days"></div>
+        </div>
+        <div id="rent-click"><input class="rent-button" type="button" value="rent"></div>
+    </div>
 
     <div class="container" id="lot-description">
         <div class="row">

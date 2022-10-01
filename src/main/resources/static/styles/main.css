@@ -10,20 +10,33 @@ body {
 }
 
 .wraper {
-    padding-top: 1%;
-    padding-left: 1%;
     display: grid;
-    /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
-    grid-template-columns: repeat(auto-fit, minmax(50px, auto));
-    grid-template-rows: auto;
-    gap: 30px;
-    grid-auto-flow: row;
-    justify-content: start;
+    justify-content: center;
     grid-template-areas:
-"C D . ."
-"C . . ."
-"T T T T";
+    "C"
+    "D"
+    "T";
 }
+
+@media screen and (min-width: 700px) {
+    .wraper {
+        padding-top: 1%;
+        padding-left: 1%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(auto, 1fr));
+        /* grid-template-columns: repeat(auto-fit, minmax(50px,auto-fit)); */
+
+        grid-template-rows: min-content min-content min-content;
+        gap: 30px;
+        grid-auto-flow: row;
+        justify-content: start;
+        grid-template-areas:
+    "C D . ."
+    "C . . ."
+    "T T T T";
+    }
+}
+
 
 #lot-description {
     grid-area: T;

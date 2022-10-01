@@ -1,78 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
+
 <div th:replace="fragments/header :: header"></div>
 <link th:href="@{/styles/main.css}" rel="stylesheet"/>
+<div class="wraper">
+    <div class="date-picker">
+        <div class="selected-date"></div>
 
-<div class="date-picker">
-    <div class="selected-date"></div>
+        <div class="dates">
+            <div class="month">
+                <div class="arrows prev-mth">&lt;</div>
+                <div class="mth"></div>
+                <div class="arrows next-mth">&gt;</div>
+            </div>
 
-    <div class="dates">
-        <div class="month">
-            <div class="arrows prev-mth">&lt;</div>
-            <div class="mth"></div>
-            <div class="arrows next-mth">&gt;</div>
+            <div class="days"></div>
         </div>
-
-        <div class="days"></div>
+        <div id="rent-click"><input class="rent-button" type="button" value="rent"></div>
     </div>
-</div>
 
-<div><input class="rent-button" type="button" value="rent"></div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="card" style="width: 22rem;">
-                <img class="card-img-top" th:src="@{${lot.image}}" alt="Card image cap">
-                <div class="card-body">
-                    <h2 class="card-title" th:text="${lot.name}"></h2>
-                    <h6 class="card-subtitle mb-2 text-decoration-underline" th:text="${lot.price}"></h6>
+    <div class="container" id="lot-card">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card" style="width: 22rem;">
+                    <img class="card-img-top" th:src="@{${lot.image}}" alt="Card image cap">
+                    <div class="card-body">
+                        <h2 class="card-title" th:text="${lot.name}"></h2>
+                        <h6 class="card-subtitle mb-2 text-decoration-underline" th:text="${lot.price}"></h6>
 
-                    <p class="card-text" th:text="${lot.description}"></p>
-                    <a href="#" class="btn btn-primary btn-sm">Rent</a>
+                        <p class="card-text" th:text="${lot.description}"></p>
+                        <a href="#" class="btn btn-primary btn-sm">Rent</a>
+                    </div>
                 </div>
             </div>
+
+
         </div>
-
-
     </div>
-</div>
 
 
-<div class="container">
-    <div class="row">
-        <h1> Lot</h1>
-        <table class="table table-bordered">
-            <thead class="table-dark">
-            <tr>
-                <th scope="col">name</th>
-                <th scope="col">description</th>
-                <th scope="col">price</th>
-                <th scope="col">image</th>
-                <!-- <th scope="col">actions</th>-->
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td th:text="${lot.name}"></td>
-                <td th:text="${lot.description}"></td>
-                <td th:text="${lot.price}" id="price"></td>
-                <td th:text="${lot.image}"></td>
-                <!--    <td>
-                        <a class="btn btn-primary btn-sm"
-                           th:href="@{/lots/edit/{id}(id=${lot.id})}">Update</a>
-
-                        <a class="btn btn-danger btn-sm"
-                           th:href="@{/lots/delete/{id}(id=${lot.id})}">Delete</a>
-
-                        <a class="btn btn-success btn-sm"
-                           th:href="@{/lots/rent/{id}(id=${lot.id})}">Rent</a>
-
-                    </td>-->
-            </tr>
-            </tbody>
-        </table>
+    <div class="container" id="lot-description">
+        <div class="row">
+            <h1> Lot</h1>
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                <tr>
+                    <th scope="col">name</th>
+                    <th scope="col">description</th>
+                    <th scope="col">price</th>
+                    <th scope="col">image</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${lot.name}"></td>
+                    <td th:text="${lot.description}"></td>
+                    <td th:text="${lot.price}" id="price"></td>
+                    <td th:text="${lot.image}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <script th:inline="javascript">

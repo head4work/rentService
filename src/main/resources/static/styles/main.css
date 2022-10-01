@@ -9,13 +9,43 @@ body {
     font-family: 'Saira', Arial, Helvetica, sans-serif;
 }
 
+.wraper {
+    padding-top: 1%;
+    padding-left: 1%;
+    display: grid;
+    /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+    grid-template-columns: repeat(auto-fit, minmax(50px, auto));
+    grid-template-rows: auto;
+    gap: 30px;
+    grid-auto-flow: row;
+    justify-content: start;
+    grid-template-areas:
+"C D . ."
+"C . . ."
+"T T T T";
+}
+
+#lot-description {
+    grid-area: T;
+}
+
+#lot-card {
+    grid-area: C;
+}
+
+#rent-click {
+    align-self: center;
+}
+
 .rent-button {
     pointer-events: none;
     padding: 15px 32px;
-    background-color: #313131;
-    border: none;
+    background-color: #afbbc0;
+    border-radius: 30px;
+    border-width: 1px;
     font-size: 16px;
-    color: rgb(156, 152, 152);
+    color: rgb(0, 0, 0);
+
 }
 
 .rent-button.active {
@@ -24,7 +54,7 @@ body {
 }
 
 .rent-button:hover {
-    background-color: #00CA85;
+    background-color: #50ee50;
 }
 
 .rent-button:active {
@@ -44,56 +74,42 @@ h1 span {
 }
 
 .date-picker {
-    background-color: #cccccc;
-    border-style: groove;
-    position: relative;
-    width: 100%;
-    max-width: 320px;
-    height: 60px;
-    background-color: #FFF;
+    grid-area: D;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    min-width: 270px;
+    background-color: #edf6f8;
+    border: #9b9b9b;
+    border-radius: 15px;
     margin: 30px auto;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
-
-    cursor: pointer;
     user-select: none;
 }
 
-.date-picker:hover {
-    background-color: #F3F3F3;
-}
 
 .date-picker .selected-date {
-    display: block;
-    justify-content: center;
-    align-items: center;
-    color: #313131;
-    font-size: medium;
+    align-self: center;
+    color: #000000;
+    font-size: large;
+    pointer-events: none;
 }
 
 .date-picker .dates {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: #FFF;
-}
-
-.date-picker .dates.active {
-    background-color: #f5dede;
-    border-style: groove;
-
-    display: block;
+    cursor: pointer;
 }
 
 .date-picker .dates .month {
+    font-weight: 500;
+    cursor: default;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid #EEE;
+    border-bottom: 1px solid rgb(206, 206, 206);
 }
 
 .date-picker .dates .month .arrows {
+    cursor: pointer;
     width: 35px;
     height: 35px;
     display: flex;

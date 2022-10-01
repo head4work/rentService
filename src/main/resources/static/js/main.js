@@ -90,6 +90,8 @@ function ajaxPost() {
 		}
 	});
 
+	purgeSelectedDates();
+
 }
 
 function toggleDatePicker(e) {

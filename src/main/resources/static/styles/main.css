@@ -44,6 +44,8 @@ body {
 
 #lot-card {
     grid-area: C;
+    display: flex;
+    justify-content: center;
 }
 
 #rent-click {

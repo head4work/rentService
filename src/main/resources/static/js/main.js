@@ -49,194 +49,194 @@ rent_button.addEventListener('click', ajaxPost);
 
 
 document.addEventListener('click', function handleClickOutsideBox(event) {
-	console.log(event.composedPath().includes(date_picker_element));
-	//console.log(date_picker_element.contains(event.target));
-	if (!event.composedPath().includes(date_picker_element)) {
-		purgeSelectedDates();
-		populateDates();
-	}
+    console.log(event.composedPath().includes(date_picker_element));
+    //console.log(date_picker_element.contains(event.target));
+    if (!event.composedPath().includes(date_picker_element)) {
+        purgeSelectedDates();
+        populateDates();
+    }
 });
 
 
 // FUNCTIONS
 function populateDisableDates() {
-	lotRentDates.forEach(date => disableDates.push(new Date(date)));
+    lotRentDates.forEach(date => disableDates.push(new Date(date)));
 }
 
 function ajaxPost() {
 
-	// PREPARE Rent DATA
-	var rentData = {
-		startRentDate: selectedDates[0],
-		endRentDate: selectedDates.length > 1 ? selectedDates[1] : selectedDates[0],
-		lotId: lotId
-	}
+    // PREPARE Rent DATA
+    var rentData = {
+        startRentDate: selectedDates[0],
+        endRentDate: selectedDates.length > 1 ? selectedDates[1] : selectedDates[0],
+        lotId: lotId
+    }
 
-	// DO POST
-	$.ajax({
-		type: "POST",
-		contentType: "application/json",
-		url: "/api/rent",
-		data: JSON.stringify(rentData),
-		dataType: 'json',
-		success: function (result) {
-			let incomeDates = result.disableDates.map(date => new Date(date), (0, 0, 0, 0));
-			incomeDates.forEach(date => disableDates.push(date));
-			populateDates();
-		},
-		error: function (e) {
-			alert("Error!")
-			console.log("ERROR: ", e);
-		}
-	});
+    // DO POST
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/api/rent",
+        data: JSON.stringify(rentData),
+        dataType: 'json',
+        success: function (result) {
+            let incomeDates = result.disableDates.map(date => new Date(date), (0, 0, 0, 0));
+            incomeDates.forEach(date => disableDates.push(date));
+            populateDates();
+        },
+        error: function (e) {
+            alert("Error!")
+            console.log("ERROR: ", e);
+        }
+    });
 
-	purgeSelectedDates();
+    purgeSelectedDates();
 
 }
 
 function toggleDatePicker(e) {
-	if (!checkEventPathForClass(e.path, 'dates')) {
-		dates_element.classList.toggle('active');
-	}
+    if (!checkEventPathForClass(e.path, 'dates')) {
+        dates_element.classList.toggle('active');
+    }
 }
 
 function goToNextMonth(e) {
-	month++;
-	if (month > 11) {
-		month = 0;
-		year++;
-	}
-	mth_element.textContent = months[month] + ' ' + year;
-	populateDates();
+    month++;
+    if (month > 11) {
+        month = 0;
+        year++;
+    }
+    mth_element.textContent = months[month] + ' ' + year;
+    populateDates();
 }
 
 function goToPrevMonth(e) {
-	month--;
-	if (month < 0) {
-		month = 11;
-		year--;
-	}
-	mth_element.textContent = months[month] + ' ' + year;
-	populateDates();
+    month--;
+    if (month < 0) {
+        month = 11;
+        year--;
+    }
+    mth_element.textContent = months[month] + ' ' + year;
+    populateDates();
 }
 
 function checkInRange(d) {
-	let sortedDates = selectedDates.sort((date1, date2) => date1 - date2);
-	let start = sortedDates[0];
-	let end = sortedDates[1];
-	let dates = [];
-	let date = new Date(start.getTime());
+    let sortedDates = selectedDates.sort((date1, date2) => date1 - date2);
+    let start = sortedDates[0];
+    let end = sortedDates[1];
+    let dates = [];
+    let date = new Date(start.getTime());
 
-	while (date < end) {
-		dates.push(new Date(date).toDateString());
-		date.setDate(date.getDate() + 1);
-	}
-	dates[0] = '';
+    while (date < end) {
+        dates.push(new Date(date).toDateString());
+        date.setDate(date.getDate() + 1);
+    }
+    dates[0] = '';
 
-	if (!dates.map(d => checkNotDisabled(d)).includes(false)) {
-		return dates.includes(d.toDateString())
-	} else {
-		purgeSelectedDates();
-	}
+    if (!dates.map(d => checkNotDisabled(d)).includes(false)) {
+        return dates.includes(d.toDateString())
+    } else {
+        purgeSelectedDates();
+    }
 }
 
 
 function checkNotDisabled(d) {
-	return disableDates.length == 0 ? true : !disableDates.map(date => date.toDateString()).includes(d);
+    return disableDates.length == 0 ? true : !disableDates.map(date => date.toDateString()).includes(d);
 }
 
 function purgeSelectedDates() {
-	selectedDates = [];
-	counter = 0;
-	rent_button.classList.remove('active');
-	selectedCounter = 0;
-	price_element.textContent = price;
+    selectedDates = [];
+    counter = 0;
+    rent_button.classList.remove('active');
+    selectedCounter = 0;
+    price_element.textContent = price;
 }
 
 
 function populateDates() {
-	days_element.innerHTML = '';
-	let amount_days = getDaysInMonth(year, month);
+    days_element.innerHTML = '';
+    let amount_days = getDaysInMonth(year, month);
 
-	for (let i = 0; i < amount_days; i++) {
-		const day_element = document.createElement('div');
-		day_element.classList.add('day');
-		day_element.textContent = i + 1;
-		let setDate = new Date(year, month, (i + 1), (0, 0, 0, 0));
+    for (let i = 0; i < amount_days; i++) {
+        const day_element = document.createElement('div');
+        day_element.classList.add('day');
+        day_element.textContent = i + 1;
+        let setDate = new Date(year, month, (i + 1), (0, 0, 0, 0));
 
-		if (counter > 1 && (checkInRange(setDate))) {
-			day_element.classList.add('selected-between');
-			selectedCounter++;
-			console.log(selectedCounter);
-		}
+        if (counter > 1 && (checkInRange(setDate))) {
+            day_element.classList.add('selected-between');
+            selectedCounter++;
+            console.log(selectedCounter);
+        }
 
-		for (let k = 0; k < selectedDates.length; k++) {
-			if (selectedDates[k].toDateString() == setDate.toDateString()) {
-				day_element.classList.add('selected');
-			}
-		}
+        for (let k = 0; k < selectedDates.length; k++) {
+            if (selectedDates[k].toDateString() == setDate.toDateString()) {
+                day_element.classList.add('selected');
+            }
+        }
 
-		// if element == selected
+        // if element == selected
 
-		// if ((i + 1) == selectedDay &&  year == selectedYear && month == selectedMonth ) {
-		// 	day_element.classList.add('selected');
-		// }
-		if (checkNotDisabled(setDate.toDateString())) {
-			day_element.addEventListener('click', function () {
-				if (counter >= 2) {
-					purgeSelectedDates();
-				}
+        // if ((i + 1) == selectedDay &&  year == selectedYear && month == selectedMonth ) {
+        // 	day_element.classList.add('selected');
+        // }
+        if (checkNotDisabled(setDate.toDateString())) {
+            day_element.addEventListener('click', function () {
+                if (counter >= 2) {
+                    purgeSelectedDates();
+                }
 
-				selectedDate = new Date(year + '-' + (month + 1) + '-' + (i + 1));
-				selectedDates.push(new Date(year, month, (i + 1), (0, 0, 0, 0)));
-				rent_button.classList.add('active');
-				counter++;
-				selectedCounter++;
+                selectedDate = new Date(year + '-' + (month + 1) + '-' + (i + 1));
+                selectedDates.push(new Date(year, month, (i + 1), (0, 0, 0, 0)));
+                rent_button.classList.add('active');
+                counter++;
+                selectedCounter++;
 
-				// selectedDay = (i + 1);
-				// selectedMonth = month;
-				// selectedYear = year;
+                // selectedDay = (i + 1);
+                // selectedMonth = month;
+                // selectedYear = year;
 
-				selected_date_element.textContent = formatDate(selectedDate);
-				selected_date_element.dataset.value = selectedDate;
-				populateDates();
-			});
-		} else {
-			day_element.classList.add('disabled');
-		}
+                selected_date_element.textContent = formatDate(selectedDate);
+                selected_date_element.dataset.value = selectedDate;
+                populateDates();
+            });
+        } else {
+            day_element.classList.add('disabled');
+        }
 
 
-		days_element.appendChild(day_element);
-	}
-	price_element.textContent = price * selectedCounter;
+        days_element.appendChild(day_element);
+    }
+    price_element.textContent = price * selectedCounter;
 }
 
 // HELPER FUNCTIONS
 function getDaysInMonth(year, month) {
-	return new Date(year, month + 1, 0).getDate();
+    return new Date(year, month + 1, 0).getDate();
 }
 
 function checkEventPathForClass(path, selector) {
-	for (let i = 0; i < path.length; i++) {
-		if (path[i].classList && path[i].classList.contains(selector)) {
-			return true;
-		}
-	}
+    for (let i = 0; i < path.length; i++) {
+        if (path[i].classList && path[i].classList.contains(selector)) {
+            return true;
+        }
+    }
 
-	return false;
+    return false;
 }
 
 function formatDate(d) {
-	let day = d.getDate();
-	if (day < 10) {
-		day = '0' + day;
-	}
+    let day = d.getDate();
+    if (day < 10) {
+        day = '0' + day;
+    }
 
-	let month = d.getMonth() + 1;
-	if (month < 10) {
-		month = '0' + month;
-	}
-	let year = d.getFullYear();
-	return day + ' / ' + month + ' / ' + year;
+    let month = d.getMonth() + 1;
+    if (month < 10) {
+        month = '0' + month;
+    }
+    let year = d.getFullYear();
+    return day + ' / ' + month + ' / ' + year;
 }
 

@@ -2,48 +2,27 @@
 <html lang="en">
 
 <body>
+<link th:href="@{/styles/lots.css}" rel="stylesheet"/>
 <div th:replace="fragments/header :: header"></div>
 
-<div class="container">
-    <div class="row">
-        <h1> lots</h1>
-        <div class="row">
-            <div class="col-lg-3">
-                <a class="btn btn-primary mb-3" th:href="@{/lots/new}"> Add Lot</a>
-            </div>
+<div class="wrapper">
+    <main>
+        <div class="lot" th:each="lot: ${lots}" th:attr="onclick=|rentLot('${lot.id}')|">
+            <img th:src="@{${lot.image}}" alt="image of lot">
+            <h3 th:text="${lot.name}"></h3>
+            <p th:text="${lot.description}"></p>
+            <h6 th:text="${lot.price}"></h6>
+            <button type="button" class="rent" th:href="@{/lots/rent/{id}(id=${lot.id})}">Rent</button>
         </div>
-        <table class="table table-bordered">
-            <thead class="table-dark">
-            <tr>
-                <th scope="col">name</th>
-                <th scope="col">description</th>
-                <th scope="col">price</th>
-                <th scope="col">image</th>
-                <th scope="col">actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="lot: ${lots}">
-                <td th:text="${lot.name}"></td>
-                <td th:text="${lot.description}"></td>
-                <td th:text="${lot.price}"></td>
-                <td th:text="${lot.image}"></td>
-                <td>
-                    <a class="btn btn-primary btn-sm"
-                       th:href="@{/lots/edit/{id}(id=${lot.id})}">Update</a>
-
-                    <a class="btn btn-danger btn-sm"
-                       th:href="@{/lots/delete/{id}(id=${lot.id})}">Delete</a>
-
-                    <a class="btn btn-success btn-sm"
-                       th:href="@{/lots/rent/{id}(id=${lot.id})}">Rent</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+    </main>
+    <aside class="left-sidebar">Left Sidebar</aside>
+    <footer th:replace="fragments/footer :: footer"></footer>
 </div>
-
-
+<script>
+    function rentLot(id) {
+        window.location.href = "/lots/rent/" + id;
+    }
+</script>
 </body>
+
 </html>

@@ -1,9 +1,6 @@
 package com.masterpiece.rentService.controller.lot;
 
 import com.masterpiece.rentService.model.Lot;
-import com.masterpiece.rentService.service.LotService;
-import com.masterpiece.rentService.service.RentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,29 +14,19 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 @Controller
-@RequestMapping("/lots")
-public class LotController {
-
-    @Autowired
-    private RentService rentService;
-
-    private LotService lotService;
-
-
-    public LotController(LotService lotService) {
-        this.lotService = lotService;
-    }
+@RequestMapping("/admin/lots")
+public class AdminLotController extends AbstractLotController {
 
     @GetMapping
-    public String listLots(Model model) {
-        model.addAttribute("lots", lotService.getAll());
-        return "lots";
+    public String getAll(Model model) {
+        model.addAttribute("lots", super.getAll());
+        return "adminLots";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteLot(@PathVariable int id) {
-        lotService.delete(id);
-        return "redirect:/lots";
+        super.delete(id);
+        return "redirect:/admin/lots";
     }
 
     @GetMapping("/new")
@@ -50,7 +37,7 @@ public class LotController {
 
     @GetMapping("/edit/{id}")
     public String lotUpdate(@PathVariable int id, Model model) {
-        model.addAttribute("lot", lotService.get(id));
+        model.addAttribute("lot", super.get(id));
         return "lotForm";
     }
 
@@ -59,15 +46,15 @@ public class LotController {
         if (result.hasErrors()) {
             return "lotForm";
         }
-        lotService.create(lot);
-        return "redirect:/lots";
+        super.create(lot);
+        return "redirect:/admin/lots";
     }
 
     @GetMapping("/rent/{id}")
     public String rentLot(@PathVariable int id, Model model) {
-        Lot lot = lotService.get(id);
+        Lot lot = super.get(id);
         model.addAttribute("lot", lot);
-        model.addAttribute("lotRentDates", rentService.getLotRentDates(lot));
+        model.addAttribute("lotRentDates", super.getLotRentDates(lot));
         return "rentForm";
     }
 

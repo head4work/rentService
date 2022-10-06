@@ -8,10 +8,10 @@
 <div class="wrapper">
     <main>
         <div class="lot" th:each="lot: ${lots}" th:attr="onclick=|rentLot('${lot.id}')|">
-            <img th:src="@{${lot.image}}" alt="image of lot">
-            <h3 th:text="${lot.name}"></h3>
-            <p th:text="${lot.description}"></p>
-            <h6 th:text="${lot.price}"></h6>
+            <img class="lot-img" th:src="@{${lot.image}}" alt="image of lot">
+            <h3 class="lot-h3" th:text="${lot.name}"></h3>
+            <p class="lot-p" th:text="${lot.description}"></p>
+            <h6 class="lot-h6" th:text="${lot.price}"></h6>
             <button type="button" class="rent" th:href="@{/lots/rent/{id}(id=${lot.id})}">Rent</button>
         </div>
     </main>

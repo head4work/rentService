@@ -11,7 +11,7 @@
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
             <h1 class="text-center">Create new lot</h1>
             <div class="card-body">
-                <form th:action="@{/lots/new}" th:object="${lot}" method="post">
+                <form th:action="@{/admin/lots/new}" th:object="${lot}" method="post">
                     <input type="hidden" th:field="*{id}"/>
 
                     <div class="form-group">

@@ -1,5 +1,5 @@
 # Renting furniture app
-This is a web application with  role-based authorization with java backend for online rent furniture service, JavaScript interactive range date picker working with ajax call server to fetch data in postgres db   
+This is a web application with  role-based authorization with java backend for online rent furniture service, JavaScript and Jquery frontend, interactive range date picker working with ajax call server to fetch data in postgres db   
 ## Table of contents
 * [Task](#task)
 * [Technologies](#technologies)
